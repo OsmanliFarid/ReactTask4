@@ -29,35 +29,52 @@ const App = () => {
   };
   return (
     <>
-      <div>
-        <div className="">
-          <h1>TODO LIST</h1>
-        </div>
-        <div className="flex gap-5">
-          <div className="">
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
+          <div className="mb-6 text-center">
+            <h1 className="text-2xl font-bold text-gray-800">📝 TODO LIST</h1>
+          </div>
+
+          <div className="flex items-center gap-3 mb-4">
             <input
               type="text"
-              className="outline-1 inline-block"
+              className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
               value={Todo}
               onChange={(e) => SetTodo(e.target.value)}
+              placeholder="Yazını daxil et..."
+            />
+            <input
+              type="submit"
+              value="Əlavə et"
+              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2 rounded-lg cursor-pointer transition duration-200"
+              onClick={set}
             />
           </div>
-          <div className="bg-amber-500 ml-[20px]">
-            <input type="submit" className="" onClick={set} />
-          </div>
-        </div>
-        <div className="">
-          {NewInput.map(({ id, todo }) => {
-            return (
-              <>
-                <div className="flex items-center gap-3 mt-[20px]">
-                  <h1 key={id}>{todo}</h1>
-                  <MdDelete onClick={() => DeleteShow(id)} />
-                  <h1 onClick={() => Edit(id)}>edit</h1>
+
+          <div className="space-y-3">
+            {NewInput.map(({ id, todo }) => (
+              <div
+                key={id}
+                className="flex justify-between items-center bg-gray-100 p-3 rounded-lg shadow-sm"
+              >
+                <h1 className="text-gray-700 font-medium">{todo}</h1>
+                <div className="flex items-center gap-2 text-lg">
+                  <button
+                    onClick={() => Edit(id)}
+                    className="text-blue-500 hover:text-blue-700 transition"
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    onClick={() => DeleteShow(id)}
+                    className="text-red-500 hover:text-red-700 transition"
+                  >
+                    🗑️
+                  </button>
                 </div>
-              </>
-            );
-          })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
