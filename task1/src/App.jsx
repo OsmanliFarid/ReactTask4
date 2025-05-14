@@ -16,6 +16,17 @@ const App = () => {
   const DeleteShow = (id) => {
     SetNewInput((SetNewInput) => SetNewInput.filter((item) => item.id !== id));
   };
+  const Edit = (id) => {
+    const neww = NewInput.map((item) => {
+      if (item.id === id) {
+        const mesaj = prompt("mesaji deyis", item.todo);
+        return { ...item, todo: mesaj };
+      }
+      return item;
+    });
+
+    SetNewInput(neww);
+  };
   return (
     <>
       <div>
@@ -42,6 +53,7 @@ const App = () => {
                 <div className="flex items-center gap-3 mt-[20px]">
                   <h1 key={id}>{todo}</h1>
                   <MdDelete onClick={() => DeleteShow(id)} />
+                  <h1 onClick={() => Edit(id)}>edit</h1>
                 </div>
               </>
             );
